@@ -14,4 +14,8 @@
     "age": 7,
     "kind": "dog",
     "name": "Winston"
+}, {
+    "age": 26,
+    "kind": "horse",
+    "name": "Chuy"
 }]
