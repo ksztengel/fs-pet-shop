@@ -61,7 +61,8 @@ app.post('/pets', function(req, res) {
         if (!pets) {
             return res.sendStatus(400);
         }
-        if (kind === "" || name === "" || typeof age != Number){
+
+        if (kind === "" || name === "" || isNaN(age)) {
             return res.sendStatus(400);
         }
         pets.push({
@@ -99,9 +100,6 @@ app.put('/pets/:id', function(req, res) {
         if (id < 0 || id >= pets.length || Number.isNaN(id)) {
             res.sendStatus(404)
         }
-        if (kind === "" || name === "" || typeof age != Number){
-            return res.sendStatus(400);
-        }
         let pet = ({
             age: age,
             kind: kind,
@@ -109,6 +107,9 @@ app.put('/pets/:id', function(req, res) {
         })
 
         if (!pets) {
+            return res.sendStatus(400);
+        }
+        if (kind === "" || name === "" || isNaN(age)) {
             return res.sendStatus(400);
         }
 
@@ -127,32 +128,32 @@ app.put('/pets/:id', function(req, res) {
     });
 });
 app.delete('/pets/:id', function(req, res) {
-  fs.readFile(petsPath, 'utf8', function(readErr, petsJSON) {
-    if (readErr) {
-      console.error(err.stack);
-      return res.sendStatus(500);
-    }
+    fs.readFile(petsPath, 'utf8', function(readErr, petsJSON) {
+        if (readErr) {
+            console.error(err.stack);
+            return res.sendStatus(500);
+        }
 
-    var id = Number.parseInt(req.params.id);
-    var pets = JSON.parse(petsJSON);
+        var id = Number.parseInt(req.params.id);
+        var pets = JSON.parse(petsJSON);
 
-    if (id < 0 || id >= pets.length || Number.isNaN(id) ) {
-      return res.sendStatus(404);
-    }
+        if (id < 0 || id >= pets.length || Number.isNaN(id)) {
+            return res.sendStatus(404);
+        }
 
-    var pet = pets.splice(id, 1)[0];
-    var newpetsJSON = JSON.stringify(pets);
+        var pet = pets.splice(id, 1)[0];
+        var newpetsJSON = JSON.stringify(pets);
 
-    fs.writeFile(petsPath, newpetsJSON, function(writeErr) {
-      if (writeErr) {
-        console.error(writeErr.stack);
-        return res.sendStatus(500);
-      }
+        fs.writeFile(petsPath, newpetsJSON, function(writeErr) {
+            if (writeErr) {
+                console.error(writeErr.stack);
+                return res.sendStatus(500);
+            }
 
-      res.set('Content-Type', 'text/plain');
-      res.send(pet);
+            res.set('Content-Type', 'text/plain');
+            res.send(pet);
+        });
     });
-  });
 });
 app.listen(port, function() {
     console.log("Listening on port:", port);

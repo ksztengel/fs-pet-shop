@@ -1,1 +1,25 @@
-[{"age":5,"kind":"snake","name":"Buttons"},{"age":5,"kind":"puppy","name":"Sampson"},{"age":26,"kind":"horse","name":"Chuy"},{"age":3,"kind":"parakeet","name":"Cornflake"},{"age":12,"kind":"portie","name":"Gertrude Stein"},{"age":null,"kind":"horse","name":"Coqueta"}]
+[{
+    "age": 5,
+    "kind": "snake",
+    "name": "Buttons"
+}, {
+    "age": 5,
+    "kind": "puppy",
+    "name": "Sampson"
+}, {
+    "age": 26,
+    "kind": "horse",
+    "name": "Chuy"
+}, {
+    "age": 18,
+    "kind": "horse",
+    "name": "Coqueta"
+}, {
+    "age": 12,
+    "kind": "portie",
+    "name": "Gertrude Stein"
+}, {
+    "age": 12,
+    "kind": "horse",
+    "name": "Clara"
+}]
