@@ -42,7 +42,6 @@ if (cmd === 'read') {
             console.error(`Usage: ${node} ${file} ${cmd} AGE KIND NAME`);
             process.exit(1);
         }
-        // pets.push(pet);
         var petsJSON = JSON.stringify(pets);
 
         fs.writeFile(petsPath, petsJSON, function(writeErr) {
