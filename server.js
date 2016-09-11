@@ -55,15 +55,19 @@ app.post('/pets', function(req, res) {
 
         let pets = JSON.parse(petsJSON);
         let age = parseInt(req.body.age)
+        let kind = req.body.kind
+        let name = req.body.name
 
         if (!pets) {
             return res.sendStatus(400);
         }
-
+        if (kind === "" || name === "" || typeof age != Number){
+            return res.sendStatus(400);
+        }
         pets.push({
             age: age,
-            kind: req.body.kind,
-            name: req.body.name,
+            kind: kind,
+            name: name
         })
 
         var newPetsJSON = JSON.stringify(pets);
@@ -89,14 +93,19 @@ app.put('/pets/:id', function(req, res) {
         let id = Number.parseInt(req.params.id)
         let pets = JSON.parse(petsJSON)
         let age = parseInt(req.body.age)
+        let kind = req.body.kind
+        let name = req.body.name
 
         if (id < 0 || id >= pets.length || Number.isNaN(id)) {
             res.sendStatus(404)
         }
+        if (kind === "" || name === "" || typeof age != Number){
+            return res.sendStatus(400);
+        }
         let pet = ({
             age: age,
-            kind: req.body.kind,
-            name: req.body.name,
+            kind: kind,
+            name: name,
         })
 
         if (!pets) {
@@ -104,9 +113,6 @@ app.put('/pets/:id', function(req, res) {
         }
 
         pets[id] = pet
-        console.log(pet);
-        // res.send(pet)
-
 
         var newPetsJSON = JSON.stringify(pets);
 
